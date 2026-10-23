@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "xmibradar",
+  "version": "${version}",
+  "name": "xMIBRadar",
+  "description": "xMIBRadar by xMIB – radar graczy w pobliżu z powiadomieniami na telefon (ntfy): zdjęcie, nick, zbroja i maksymalne serca. Ustawienia pod klawiszem K.",
+  "authors": [
+    "xMIB"
+  ],
+  "license": "All Rights Reserved",
+  "icon": "assets/xmibradar/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "pl.xmib.radar.XMIBRadarClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
