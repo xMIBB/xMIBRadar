@@ -1,0 +1,32 @@
+name: build
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { mc: "1.20.1", java: 17, gradle: "8.12" }
+          - { mc: "1.21.4", java: 21, gradle: "8.12" }
+          - { mc: "1.21.5", java: 21, gradle: "8.12" }
+          - { mc: "1.21.11", java: 21, gradle: "8.14.3" }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: ${{ matrix.gradle }}
+      - name: Build
+        run: gradle build --no-daemon
+        working-directory: versions/${{ matrix.mc }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xMIBRadar-${{ matrix.mc }}
+          path: versions/${{ matrix.mc }}/build/libs/xMIBRadar-1.0.0.jar
